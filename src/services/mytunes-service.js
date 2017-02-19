@@ -11,24 +11,40 @@ function saveMytunes() {
   localStorage.setItem('myTunes', JSON.stringify(myTunes))
 }
 
-function loadMytunes() {
+function loadMyTunes() {
   myTunes = JSON.parse(localStorage.getItem('myTunes')) || {}
 }
 
-loadMytunes()
+//loadMytunes()
 
 export default {
-  getTracks() { },
+  getTracks() { 
+    loadMyTunes()
+    return myTunes 
+  },
   addTrack(track) {
     // OCCASIONALLY YOU WILL RUN INTO ISSUES WHERE VUE WILL BE
     // UNAWARE THAT A CHANGE HAS OCCURED TO YOUR DATA
-    // TO ELIMINATE THIS PROBLEM YOU CAN USE 
-    Vue.set(myTunes, track.id, track)
+    // TO ELIMINATE THIS PROBLEM YOU CAN USE
+    Vue.set(myTunes, track.trackId, track)
     saveMytunes()
     // YOU CAN READ MORE ABOUT VUE.SET HERE
     // https://vuejs.org/v2/api/#Vue-set
    },
-  removeTrack() { },
-  promoteTrack() { },
-  demoteTrack() { }
+  removeTrack(track) { 
+    Vue.delete(myTunes, track.trackId, track)
+    saveMytunes()
+   },
+  promoteTrack(track) { 
+    if(track.vote === 1)
+    {track.vote = 0}
+    else {track.vote = 1}
+    saveMytunes()
+  },
+  demoteTrack(track) { 
+    if(track.vote === -1)
+    {track.vote = 0}
+    else {track.vote = -1}
+    saveMytunes()
+  }
 }
