@@ -1,8 +1,47 @@
-export default {
-  getMusicByArtist(artist) {
-    var url = '//bcw-getter.herokuapp.com/?url=';
-    var url2 = 'https://itunes.apple.com/search?term=' + artist;
-    var apiUrl = url + encodeURIComponent(url2);
-    return fetch(apiUrl)
-  }
+      const url = '//bcw-getter.herokuapp.com/?url=';
+      const url2 = 'https://itunes.apple.com/search?term=';
+      const apiUrl = url + encodeURIComponent(url2);
+
+let songList = {}
+let itunesList =[]
+
+let itunesService = {
+
+    getMusicByArtist (artist, cb) {
+      return fetch(url + encodeURIComponent(url2+artist))
+      .then (res => res.json() )
+
+    },
+    
+    addSong(song){
+      songList[song.trackId]= song
+      console.log(songList)
+    },
+    getMySongs(){
+      return songList
+    },
+    getAllSongs(){
+      itunesList=song
+    }
 }
+
+export default itunesService
+   
+   
+   
+      // $('#get-music-button').text('LOADING....');
+      
+      // return $.getJSON(apiUrl).then(function(response){
+      //   let songList = response.results.map(function (song) {
+      //             return {
+      //                 title: song.trackName,
+      //                 albumArt: song.artworkUrl60,
+      //                 artist: song.artistName,
+      //                 collection: song.collectionName,
+      //                 price: song.collectionPrice,
+      //                 preview: song.previewUrl
+      //               };
+      //           })
+      //   $('#get-music-button').text('preview the music');
+      //   return songList;
+      // })

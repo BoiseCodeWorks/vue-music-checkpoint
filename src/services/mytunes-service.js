@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import itunesService from './itunes-service'
 
 let myTunes = {}
 
@@ -17,8 +18,12 @@ function loadMytunes() {
 
 loadMytunes()
 
-export default {
-  getTracks() { },
+
+let myTunesService = {
+
+  getTracks() { 
+    return myTunes
+  },
   addTrack(track) {
     // OCCASIONALLY YOU WILL RUN INTO ISSUES WHERE VUE WILL BE
     // UNAWARE THAT A CHANGE HAS OCCURED TO YOUR DATA
@@ -28,7 +33,13 @@ export default {
     // YOU CAN READ MORE ABOUT VUE.SET HERE
     // https://vuejs.org/v2/api/#Vue-set
    },
-  removeTrack() { },
+  removeTrack(song) { 
+    delete myTunes[song.id]
+    saveMytunes()
+    loadMytunes()
+  },
   promoteTrack() { },
   demoteTrack() { }
 }
+
+export default myTunesService
