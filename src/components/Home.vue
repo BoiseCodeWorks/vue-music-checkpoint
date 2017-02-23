@@ -1,14 +1,20 @@
 <template>
   <div class="home">
     <!-- YOU WILL PROBABLY END UP WITH SOMETHING LIKE THIS -->
-    <my-tunes class="my-tunes"></my-tunes>
-    <itunes class="itunes"></itunes>
+    <Itunes class="itunes"></Itunes>
+    <MyTunes class="my-tunes"></MyTunes>
   </div>
 </template>
 
 <script>
+import Itunes from './Itunes'
+import MyTunes from './MyTunes'
+import itunesService from '../services/itunes-service'
+import myTunesService from "../services/mytunes-service"
+
 export default {
   name: 'home',
+  components: {Itunes, MyTunes},
   data () {
     return {
       
@@ -28,12 +34,12 @@ export default {
   display: inline-block;
   min-height: 500px;
   min-width: 50%;
-  background: purple;
+  background: black;
 }
 
 .itunes{
   display: inline-block;
-  background: pink;
+  background: darkred;
   min-height: 500px;
   min-width: 45%;
 }

@@ -2,7 +2,7 @@
   "name": "vue-music",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Jake Overall <joverall22@gmail.com>",
+  "author": "Brandon",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

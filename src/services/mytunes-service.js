@@ -1,6 +1,12 @@
 import Vue from 'vue'
 
 let myTunes = {}
+// let mySelection = []
+
+// function saveMySelection(track){
+//   mySelection.push(track)
+//   saveMytunes()
+// }
 
 // THESE ARE SIMPLE HELPER FUNCTIONS TO KEEP YOUR MYTUNES IN LOCAL STORAGE
 // WE WILL EVENTUALLY BE REPLACING THESE GUYS BUT NOT TODAY :)
@@ -18,17 +24,39 @@ function loadMytunes() {
 loadMytunes()
 
 export default {
-  getTracks() { },
+  getTracks() {
+    loadMytunes()
+    return myTunes
+  },
   addTrack(track) {
+    myTunes[track.id] = track 
+    track.isThere = true
+    track.demote = 0
+    track.promote = 1
+    // saveMySelection(track)
     // OCCASIONALLY YOU WILL RUN INTO ISSUES WHERE VUE WILL BE
     // UNAWARE THAT A CHANGE HAS OCCURED TO YOUR DATA
-    // TO ELIMINATE THIS PROBLEM YOU CAN USE 
+    // TO ELIMINATE THIS PROBLEM YOU CAN USE
     Vue.set(myTunes, track.id, track)
     saveMytunes()
     // YOU CAN READ MORE ABOUT VUE.SET HERE
     // https://vuejs.org/v2/api/#Vue-set
-   },
-  removeTrack() { },
-  promoteTrack() { },
-  demoteTrack() { }
+  },
+  removeTrack(track) {
+    track.isThere = false
+    Vue.delete(myTunes, track.id)
+    saveMytunes()
+    loadMytunes()
+  },
+  promoteTrack(track) {
+    track.promote += 1
+    Vue.set(myTunes,track.id,track)
+    saveMytunes()
+
+  },
+  demoteTrack(track) {
+    track.demote += 1
+    Vue.set(myTunes,track.id,track)
+    saveMytunes()
+  }
 }
