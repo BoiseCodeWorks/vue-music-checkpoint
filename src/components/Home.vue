@@ -1,41 +1,47 @@
 <template>
   <div class="home">
-    <!-- YOU WILL PROBABLY END UP WITH SOMETHING LIKE THIS -->
-    <my-tunes class="my-tunes"></my-tunes>
-    <itunes class="itunes"></itunes>
+    <!--<div class="container">-->
+      <div class="row">
+        <!-- YOU WILL PROBABLY END UP WITH SOMETHING LIKE THIS -->
+        <Itunes class="col s7 wide"></Itunes>
+        <MyTunes class="col s5 wide"></MyTunes>
+      </div>
+      <!--</div>-->
   </div>
 </template>
 
 <script>
-export default {
-  name: 'home',
-  data () {
-    return {
-      
+  import MyTunes from './MyTunes.vue'
+  import Itunes from './Itunes.vue'
+
+  export default {
+    name: 'home',
+    components: { MyTunes, Itunes },
+    data() {
+      return {
+
+      }
     }
   }
-}
+
 </script>
 
 
 <style>
-/**
+
+  /**
 * YOU SHOULD PROBABLY MAKE THIS LOOK BETTER :)
 * BOOTSTRAP IS FOR THE WEAK FLEXBOX IS KING
 * -- McCall
 **/
-.my-tunes{
+  /*.mytunes{
   display: inline-block;
-  min-height: 500px;
-  min-width: 50%;
-  background: purple;
-}
-
-.itunes{
-  display: inline-block;
-  background: pink;
-  min-height: 500px;
   min-width: 45%;
+  max-width: 45%;
 }
-
+  .itunes{
+  display: inline-block;
+  min-width: 55%;
+  max-width: 55%;
+}*/
 </style>
